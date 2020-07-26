@@ -27,36 +27,35 @@ end
 ```		
 
 ? before something means it is optional / can be nil.
-	
-The raycast function takes as arguments:
-	Vector3		startPosition
-	Vector3		direction
-	RaycastParams	params
-	?function	customEvaluation
-				Defaults to true when (CanCollide AND (Transparency < 1)
-	?bool 		deepCopyParams
-				Defaults to false
-	?number 	stopRaycastingThreshold
-				Defaults to 0
-	
+
+## Arguments
+The raycast function takes the following as arguments.
+- **Vector3** startPosition
+- **Vector3** direction
+- **RaycastParams** params
+- **?function** customEvaluation: *Defaults to returning true when (CanCollide AND (Transparency < 1)*
+- **?bool** deepCopyParams: *Defaults to false*
+- **?number** stopRaycastingThreshold: *Defaults to 0*
+
+## Return Values
 The raycast function will always stop before doing anything else if there is no hit,
 i.e. if workspace:Raycast() returns nil, then function will stop and return nil instantly.
-
-The custom evaluation function is defined as follows. It returns true when should collide,
-otherwise the return value should evaluate to false. It takes the arguments:
-	Part	part
-	Vector3	position
-	Vector3	normal
-	Enum	material
-
 The raycast function returns a tuple:
-	?Part/TerrainCell	instance
-	?Vector3		position
-	?Vector3		normal
-	?Enum			material
+- **?Part/TerrainCell** instance
+- **?Vector3** position
+- **?Vector3** normal
+- **?Enum** material
 
 Here's what gets returned in different situations:
-	Collision with a part:			part, position, normal, material
-	Collision with terrain:			terrain, position, normal, material
-	StopRaycastingThreshold reached:	nil, position, nil, nil
-	Otherwise:				nil, nil, nil, nil
+- Collision with a part: part, position, normal, material
+- Collision with terrain: terrain, position, normal, material
+- StopRaycastingThreshold reached: nil, position, nil, nil
+- Otherwise: nil, nil, nil, nil
+
+## Custom Evaluator
+The custom evaluation function is defined as follows. It returns true when should collide,
+otherwise the return value should evaluate to false. It takes the arguments:
+- **Part** part
+- **Vector3** position
+- **Vector3** normal
+- **Enum** material
