@@ -16,12 +16,12 @@
 		local origin = Vector3.new(0, 0, 0)
 		local direction = Vector3.new(10, 10, 10)
 		
-		-- this in fact the default evaluator, but is being used here as a custom evaluator to demonstrate
-		local evaluator = function(hit, position, normal, material)
+		-- this in fact the default filter, but is being used here as a custom filter to demonstrate
+		local filter = function(hit, position, normal, material)
 			return hit.CanCollide and hit.Transparency < 1
 		end
 		
-		local hit, position, normal, material = raycast(origin, direction, params, evaluator, true, 0.5)
+		local hit, position, normal, material = raycast(origin, direction, params, filter, true, 0.5)
 		
 		-- this case must be handled manually
 		if not position then
@@ -34,7 +34,7 @@
 		Vector3			startPosition
 		Vector3			direction
 		RaycastParams	params
-		?function		customEvaluation
+		?function		customFilter
 								Defaults to true when (CanCollide AND (Transparency < 1)
 		?bool 			deepCopyParams
 								Defaults to false
@@ -44,7 +44,7 @@
 	The raycast function will always stop before doing anything else if there is no hit,
 	i.e. if workspace:Raycast() returns nil, then function will stop and return nil instantly.
 	
-	The custom evaluation function is defined as follows. It returns true when should collide,
+	The custom filter function is defined as follows. It returns true when should collide,
 	otherwise the return value should evaluate to false. It takes the arguments:
 		Part		part
 		Vector3	position
